@@ -22,6 +22,16 @@ endif
 set background=dark
 "colorscheme solarized
 
+function! CurDir()
+	let curdir = substitute(getcwd(), '/Users/amir/', "~/", "g")
+	return curdir
+endfunction	
+
+
+set statusline=%F%m%r%h\ %w\ \ path:\ %r%{CurDir()}%h\ \ \ Line:\ %l/%L:%c\ \ \ %p%%
+set laststatus=2
+
+
 "let g:colors_name="nslib_color256" 
 
 " Tab键的宽度
@@ -69,6 +79,10 @@ set fileencodings=utf8,gb18030
 set termencoding=utf8
 set fileformats=unix
 set encoding=utf8
+
+noremap <C-a> <esc>ggVG
+set clipboard+=unnamed
+
 
 "高亮当前行 Highlight current
 set cursorline
@@ -193,14 +207,14 @@ if has("cscope")
 		 cs add $CSCOPE_DB
 	endif
 	set cscopeverbose	
-	nmap <leader>ss :cs find s <C-R>=expand("<cword>")<CR><CR>
-	nmap <leader>sg :cs find g <C-R>=expand("<cword>")<CR><CR>
-	nmap <leader>sc :cs find c <C-R>=expand("<cword>")<CR><CR>
-	nmap <leader>st :cs find t <C-R>=expand("<cword>")<CR><CR>
-	nmap <leader>se :cs find e <C-R>=expand("<cword>")<CR><CR>
-	nmap <leader>sf :cs find f <C-R>=expand("<cfile>")<CR><CR>
-	nmap <leader>si :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
-	nmap <leader>sd :cs find d <C-R>=expand("<cword>")<CR><CR>
+	nmap <leader>fs :cs find s <C-R>=expand("<cword>")<CR><CR>:copen<CR>
+	nmap <leader>fg :cs find g <C-R>=expand("<cword>")<CR><CR>
+	nmap <leader>fc :cs find c <C-R>=expand("<cword>")<CR><CR>:copen<CR>
+	nmap <leader>ft :cs find t <C-R>=expand("<cword>")<CR><CR>:copen<CR>
+	nmap <leader>fe :cs find e <C-R>=expand("<cword>")<CR><CR>:copen<CR>
+	nmap <leader>ff :cs find f <C-R>=expand("<cfile>")<CR><CR>:copen<CR>
+	nmap <leader>fi :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>:copen<CR>
+	nmap <leader>fd :cs find d <C-R>=expand("<cword>")<CR><CR>:copen<CR>
 endif
 
 
@@ -331,78 +345,30 @@ endfunction
 "hi ErrorMsg             term=standout             
 "hi ErrorMsg             ctermfg=LightBlue       ctermbg=DarkBlue      
 "hi WarningMsg           term=standout             
-"hi WarningMsg           ctermfg=LightBlue       ctermbg=DarkBlue      
-"hi ModeMsg              term=bold               cterm=bold            
-"hi ModeMsg              ctermfg=LightBlue       ctermbg=Black         
-"hi MoreMsg              term=bold               ctermfg=LightGreen    
-"hi MoreMsg              ctermfg=LightBlue       ctermbg=Black         
-"hi Question             term=standout           gui=bold  
-"hi Question             ctermfg=LightBlue       ctermbg=Black         
-"hi Error                term=bold               cterm=bold            
-"hi Error                ctermfg=LightBlue       ctermbg=Black                                                       
-"hi LineNr               ctermfg=LightBlue       ctermbg=Black         
-"hi CursorColumn         ctermfg=White           ctermbg=Grey          
-"hi CursorLine           ctermfg=LightBlue       ctermbg=Black         
-"hi ColorColumn          ctermfg=White           ctermbg=Grey                                                    
-"hi IncSearch            ctermfg=Black           ctermbg=DarkGrey      
-"hi Search               ctermfg=Black           ctermbg=DarkGrey      
-"hi StatusLine           term=bold               cterm=bold            
-"hi StatusLine           ctermfg=Black           ctermbg=Grey          
-"hi StatusLineNC         term=bold               cterm=bold            
-"hi StatusLineNC         ctermfg=Black           ctermbg=Grey                                              
-"hi VertSplit            ctermfg=Grey            ctermbg=Grey          
-"hi Visual               term=bold               cterm=bold            
-"hi Visual               ctermfg=Black           ctermbg=Grey                                                        
-"highlight Pmenu         ctermfg=Black           ctermbg=Grey        
-"highlight PmenuSel      ctermfg=LightBlue       ctermbg=DarkBlue                
-"hi Comment              ctermfg=DarkCyan        ctermbg=Black  
-"hi PreProc              ctermfg=Blue            ctermbg=Black  
-"hi Type                 ctermfg=LightYellow     ctermbg=Black           cterm=bold  
-"hi Constant             ctermfg=Blue            ctermbg=Black           cterm=bold  
-"hi Statement            ctermfg=LightYellow     ctermbg=Black           cterm=bold  
-"hi Special              ctermfg=Red             ctermbg=Black           cterm=bold  
-""hi SpecialKey           ctermfg=Red             ctermbg=Black           cterm=bold  
-""hi Number               ctermfg=Blue            ctermbg=Black  
-""hi cCppString           ctermfg=Red             ctermbg=Black  
-""hi String               ctermfg=Red             ctermbg=Black  
-""hi Identifier           ctermfg=Red             ctermbg=Black           cterm=bold  
-""hi Todo                 ctermfg=Black           ctermbg=Gray            cterm=bold  
-""hi NonText              ctermfg=LightBlue       ctermbg=Black  
-"hi Directory            ctermfg=Blue            ctermbg=Black  
-"hi Folded               ctermfg=DarkBlue        ctermbg=Black           cterm=bold  
-"hi FoldColumn           ctermfg=LightBlue       ctermbg=Black  
-"hi Underlined           ctermfg=LightBlue       ctermbg=Black           cterm=underline  
-"hi Title                ctermfg=LightBlue       ctermbg=Black  
-"hi Ignore               ctermfg=LightBlue       ctermbg=Black      
-"hi Directory            ctermfg=LightBlue       ctermbg=Black  
-"hi browseSynopsis       ctermfg=LightBlue       ctermbg=Black  
-"hi browseCurDir         ctermfg=LightBlue       ctermbg=Black  
-"hi favoriteDirectory    ctermfg=LightBlue       ctermbg=Black  
-"hi browseDirectory      ctermfg=LightBlue       ctermbg=Black  
-"hi browseSuffixInfo     ctermfg=LightBlue       ctermbg=Black  
-"hi browseSortBy         ctermfg=LightBlue       ctermbg=Black  
-"hi browseFilter         ctermfg=LightBlue       ctermbg=Black  
-"hi browseFiletime       ctermfg=LightBlue       ctermbg=Black  
-"hi browseSuffixes       ctermfg=LightBlue       ctermbg=Black      
-"hi TagListComment       ctermfg=LightBlue       ctermbg=Black  
-"hi TagListFileName      ctermfg=LightBlue       ctermbg=Black  
-"hi TagListTitle         ctermfg=LightBlue       ctermbg=Black  
-"hi TagListTagScope      ctermfg=LightBlue       ctermbg=Black  
-"hi TagListTagName       ctermfg=LightBlue       ctermbg=Black  
-"hi Tag                  ctermfg=LightBlue       ctermbg=Black  
-
-"hi cMathOperator guifg=#3EFFE2
-"hi cPointerOperator guifg=#3EFFE2
-"hi cLogicalOperator guifg=#3EFFE2
-"hi cBinaryOperator guifg=#3EFFE2
-"hi cBinaryOperatorError guifg=#3EFFE2
-"hi cLogicalOperator guifg=#3EFFE2
-"hi cLogicalOperatorError guifg=#3EFFE2
-"syn match cFunction "/<[a-zA-Z_][a-zA-Z_0-9]*/>[^()]*)("me=e-2
-"syn match cFunction "/<[a-zA-Z_][a-zA-Z_0-9]*/>/s*("me=e-1
-"hi cFunction gui=NONE guifg=#B5A1FF
-"syn match cMathOperator display "[-+/*/%=]"
-"syn match cPointerOperator display "->/|/."
-"syn match cLogicalOperator display "[!<>]=/="
-"syn match cLogicalOperator display "=="
-
+"========================= " Highlight All Function "=======================
+syn match cFunction "/<[a-zA-Z_][a-zA-Z_0-9]*/>[^()]*)(“me=e-2
+syn match cFunction "/<[a-zA-Z_][a-zA-Z_0-9]*/>/s*("me=e-1
+hi cFunction gui=NONE guifg=#B5A1FF 
+""========================= " Highlight All Math Operator "==================
+" C math operators
+ syn match cMathOperator display "[-+/*/%=]"
+ " C pointer operators
+ syn match cPointerOperator display "->/|/."
+ " C logical operators - boolean results
+ syn match cLogicalOperator display "[!<>]=/="
+ syn match  cLogicalOperator display "=="
+ " C bit operators
+ syn match cBinaryOperator display "/(&/||/|/^/|<</|>>/)=/="
+ syn match cBinaryOperator display "/~"
+ syn match cBinaryOperatorError display "/~="
+ " More C logical operators - highlight in preference to binary
+ syn match cLogicalOperator display "&&/|||"
+ syn match  cLogicalOperatorError display "/(&&/|||/)="
+ " Math Operator
+ hi cMathOperator guifg=#3EFFE2
+ hi cPointerOperator guifg=#3EFFE2
+ hi cLogicalOperator guifg=#3EFFE2
+ hi cBinaryOperator guifg=#3EFFE2
+ hi cBinaryOperatorError guifg=#3EFFE2
+ hi cLogicalOperator guifg=#3EFFE2
+ hi cLogicalOperatorError guifg=#3EFFE2
