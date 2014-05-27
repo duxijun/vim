@@ -85,7 +85,7 @@ set clipboard+=unnamed
 
 
 "高亮当前行 Highlight current
-set cursorline
+"set cursorline
 
 set scrolloff=3
 
