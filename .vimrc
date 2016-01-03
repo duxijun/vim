@@ -1,6 +1,8 @@
 runtime bundle/vim-pathogen/autoload/pathogen.vim
 call pathogen#infect()
 Helptags
+runtime bundle/AuthorInfo/ftplugin/authorinfo.vim
+
 
 set number
 syntax enable
